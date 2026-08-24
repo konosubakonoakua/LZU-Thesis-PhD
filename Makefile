@@ -12,7 +12,8 @@
 # 对应标准的年份（2023 新标准）见 README/CHANGELOG。
 TEMPLATE = LZUThesis-PhD
 VERSION = 5.0.0
-FILE_DATE = `date +%Y-%m-%d`
+# 日期优先取最近提交日期（git 在任意 shell 都可用），无 git 时回退系统 date
+FILE_DATE = `git log -1 --format=%cs 2>/dev/null || date +%Y-%m-%d`
 LATEXMK = latexmk
 MAIN = template-PhD
 DIST_ZIP = $(TEMPLATE)_$(VERSION)_$(FILE_DATE).zip
