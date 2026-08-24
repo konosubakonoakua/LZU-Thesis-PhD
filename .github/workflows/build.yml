@@ -1,0 +1,26 @@
+name: build
+
+# 每次 push / PR 自动编译模板，防止改动导致编译回归
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile thesis (latexmk + xelatex + biber)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: template-PhD.tex
+          latexmk_use_xelatex: true
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: LZUThesis-PhD
+          path: template-PhD.pdf
