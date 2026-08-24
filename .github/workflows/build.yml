@@ -1,6 +1,6 @@
 name: build
 
-# 每次 push / PR 自动编译模板，防止改动导致编译回归
+# 每次 push / PR 自动编译模板并打包发布 zip，防止改动导致编译/打包回归
 on:
   push:
   pull_request:
@@ -21,8 +21,16 @@ jobs:
           # 与本地 make build 一致：所有产物直接进 build/
           args: -outdir=build
 
-      - name: Upload PDF
+      - name: Install zip (for make dist)
+        run: sudo apt-get update && sudo apt-get install -y zip
+
+      - name: Package (make dist)
+        run: make dist
+
+      - name: Upload PDF and dist zip
         uses: actions/upload-artifact@v4
         with:
           name: LZUThesis-PhD
-          path: build/template-PhD.pdf
+          path: |
+            build/template-PhD.pdf
+            build/*.zip
