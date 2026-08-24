@@ -884,6 +884,25 @@
 
 \newcommand{\lzusetup}[1]{\setkeys{lzusetup}{#1}}
 
+%======================================================%
+%  20. 符号/缩略词对照表
+%======================================================%
+% 用法（放在 \frontmatter 内、目录之后；* 表示不加入目录，这里显式加回）：
+%   \begin{lzudenotation}
+%     SS  & Spread Spectrum            & 扩展频谱 \\
+%     PAPR & Peak to Average Power Ratio & 峰均比 \\
+%   \end{lzudenotation}
+\newenvironment{lzudenotation}{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{专业术语注释表}
+  \chapter*{专业术语注释表}
+  \zihao{-4}\songti
+  \begin{longtable}{lll}
+}{%
+  \end{longtable}
+}
+
 \endinput
 %%
 %% End of file `LZUThesis.cls'.
