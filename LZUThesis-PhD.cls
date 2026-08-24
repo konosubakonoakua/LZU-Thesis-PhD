@@ -844,6 +844,46 @@
 
 
 
+%======================================================%
+%  19. 键值配置接口 \lzusetup{key = value, ...}
+%======================================================%
+% 参考 thuthesis 的 \thusetup 设计，集中管理封面/声明/成绩页字段。
+% 与旧的 \xxx{...} 命令等价且向后兼容，两种方式可混用（后者覆盖前者）。
+% 用法示例：
+%   \lzusetup{
+%     school-code = {10730},
+%     degree-type = {博士},   % 或 硕士
+%     title       = {{中文题目}{第二行}},   % 标题必须双层花括号
+%     supervisor  = {张三, 教授},
+%   }
+\RequirePackage{keyval}
+
+\define@key{lzusetup}{school-code}{\schoolcode{#1}}          % 学校代码
+\define@key{lzusetup}{secret}{\secret{#1}}                   % 密级
+\define@key{lzusetup}{cid}{\cid{#1}}                         % 分类号
+\define@key{lzusetup}{degree-type}{\yjsType{#1}}             % 博士 / 硕士
+\define@key{lzusetup}{degree}{\yjsZsZy{#1}}                  % 学术学位 / 专业学位
+\define@key{lzusetup}{title}{\title{#1}}                     % 中文题目（双层花括号）
+\define@key{lzusetup}{title-en}{\entitle{#1}}                % 英文题目（双层花括号）
+\define@key{lzusetup}{author}{\author{#1}}                   % 作者
+\define@key{lzusetup}{major}{\major{#1}}                     % 学科专业
+\define@key{lzusetup}{research}{\research{#1}}               % 研究方向
+\define@key{lzusetup}{education}{\education{#1}}             % 学历教育/同等学力
+\define@key{lzusetup}{supervisor}{\advisor{#1}}              % 指导教师
+\define@key{lzusetup}{co-supervisor}{\codvisor{#1}}          % 合作导师
+\define@key{lzusetup}{work-period}{\elapse{#1}}              % 论文工作时间段
+\define@key{lzusetup}{defense-date}{\defense{#1}}            % 答辩日期
+\define@key{lzusetup}{signature}{\mysignature{#1}}           % 本人签名（图片）
+\define@key{lzusetup}{signature-date}{\mytime{#1}}           % 本人签名日期（图片）
+\define@key{lzusetup}{supervisor-signature}{\supervisorsignature{#1}} % 导师签名（图片）
+\define@key{lzusetup}{supervisor-date}{\teachertime{#1}}     % 导师签名日期（图片）
+\define@key{lzusetup}{recommended-grade}{\recommendedgrade{#1}}         % 建议成绩
+\define@key{lzusetup}{supervisor-comment}{\supervisorcomment{#1}}       % 导师评语
+\define@key{lzusetup}{committee-comment}{\committeecomment{#1}}         % 答辩小组意见
+\define@key{lzusetup}{final-grade}{\finalgrade{#1}}                     % 最终成绩
+
+\newcommand{\lzusetup}[1]{\setkeys{lzusetup}{#1}}
+
 \endinput
 %%
 %% End of file `LZUThesis.cls'.
