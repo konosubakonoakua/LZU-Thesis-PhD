@@ -13,15 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Compile thesis (latexmk + xelatex + biber)
+      - name: Compile thesis (latexmk -outdir=build)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: template-PhD.tex
           latexmk_use_xelatex: true
-          # 与本地 make build 一致：PDF 产物移到 build/
-          post_compile: |
-            mkdir -p build
-            mv -f template-PhD.pdf build/
+          # 与本地 make build 一致：所有产物直接进 build/
+          args: -outdir=build
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4

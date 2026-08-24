@@ -1,7 +1,7 @@
 # Makefile for LZUThesis-PhD
 # 用法：
-#   make build    latexmk -xelatex 一键编译（自动调度 biber），产物 PDF 输出到 build/
-#   make clean    清理编译中间产物与 build/disk 目录
+#   make build    latexmk -xelatex -outdir=build 一键编译，所有产物（含 PDF）直接进 build/
+#   make clean    清理 build/disk 目录
 #   make dist     编译并打包发布 zip（cls/tex/data/ref/figures/PDF）
 #   make all      同 build
 
@@ -14,16 +14,12 @@ MAIN = template-PhD
 
 all: build
 
-# 编译后在根目录生成 $(MAIN).pdf，随后移入 build/ 并清理中间产物
-# （latexmk -c 只清 aux 类文件，不动已移走的 pdf）
+# latexmk 从编译一开始就把 aux/bbl/pdf 全部写入 build/，根目录保持纯源码
 build:
-	$(LATEXMK) -xelatex $(MAIN)
-	mkdir -p build
-	mv -f $(MAIN).pdf build/
-	$(LATEXMK) -c $(MAIN)
+	$(LATEXMK) -xelatex -outdir=build $(MAIN)
 
 clean:
-	$(LATEXMK) -c $(MAIN)
+	$(LATEXMK) -c -outdir=build $(MAIN)
 	rm -rf build disk
 
 clear: clean
