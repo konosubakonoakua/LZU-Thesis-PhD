@@ -41,6 +41,22 @@
 > 不一定是这一天更新的，只是这一天我想起来在这里补充了，更多请查看 `git history`
 
 
+## 2026.8.24
+
+> 工程化重构（参考 thuThesis），建议连同 `*.cls`、`template-PhD.tex`、`latexmkrc`、`Makefile` 一起更新
+
+### 不兼容变化（a 类）
+
+- `template-PhD.tex` 拆分为 `data/` 目录（setup/statement/abstract/chapNN/achievements/acknowledgements），主文件只负责组装；
+  老用户需把旧 `template-PhD.tex` 的内容按新结构搬入 `data/`。
+- 新增 `\lzusetup{key = value, ...}` 键值配置接口（等价于旧 `\schoolcode{...}` 等命令，二者兼容可混用）。
+- 新增 `lzudenotation` 环境：符号/缩略词对照表，自动进目录。
+- 新增 `electronic`（默认）/ `print` 类选项：print 为双面打印模式，每章自动补空白页。
+- 新增 `latexmkrc` 与重写 `Makefile`：`make build` 一键编译（xelatex→biber→xelatex×2），`make dist` 打包发布 zip。
+- 新增 `.github/workflows/build.yml`：push/PR 自动编译防回归。
+- 修复旧 Makefile 中 `mv`/`zip` 目标名不一致导致打包失败的问题。
+
+
 ## 2025.5.23
 
 > 4.1.1.2025
