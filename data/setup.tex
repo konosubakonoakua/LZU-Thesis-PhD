@@ -1,0 +1,41 @@
+%======================================================%
+% 封皮页填写内容（学校代码/题目/作者/导师等）
+%======================================================%
+% 推荐用键值方式填写（等价于旧的 \schoolcode{...} 等命令，二者兼容、可混用）。
+% 注意：
+%   - 中文/英文标题必须用双层花括号，如 title = {{第一行}{第二行}}，
+%     外层是 \lzusetup 的值、内层是标题的换行分组；单层括号将导致封面解析失败。
+%   - degree-type 博士/硕士；degree 学术学位/专业学位。
+\lzusetup{
+  school-code = {10730},
+  secret      = {公开},
+  cid         = {请修改成你自己专业相关的分类号，如23333},
+  degree-type = {博士},   % 或 硕士
+  degree      = {\quad 学\quad 术\quad 学\quad 位\quad},  % 或 专业学位
+  title       = {{中文}{标题}},                            % 标题样式见下方旧命令注释
+  title-en    = {{ English}{ Title}},                     % 英文多行开头需加空格防粘连
+  author      = {作者姓名},
+  major       = {一级学科·专业},                          % 或 专业学位类型·培养领域
+  research    = {研究方向},
+  education   = {学历教育/同等学力人员申请博士学位},      % 或 学历教育/同等学力人员申请硕士学位
+  supervisor  = {xxx 教授/研究员},
+  co-supervisor = {xxx 教授/研究员},                       % 合作导师，可为空，但不可没有这一栏
+  work-period = {2020 年 7 月\quad 至 \quad 2021 年 3 月},
+  defense-date = {2021 年 5 月},
+}
+% 若想沿用旧命令，等价写法（保留注释供参考）：
+% \schoolcode{10730}
+% \secret{公开}
+% \cid{请修改成你自己专业相关的分类号，如23333}
+% \yjsType{博士}
+% \yjsZsZy{\quad 学\quad 术\quad 学\quad 位\quad}
+% \title{{中文}{标题}}
+% \entitle{{ English}{ Title}}
+% \author{作者姓名}
+% \major{一级学科·专业}
+% \research{研究方向}
+% \education{学历教育/同等学力人员申请博士学位}
+% \advisor{xxx 教授/研究员}
+% \codvisor{xxx 教授/研究员}
+% \elapse{2020 年 7 月\quad 至 \quad 2021 年 3 月}
+% \defense{2021 年 5 月}
