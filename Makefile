@@ -8,8 +8,10 @@
 
 # 模板名与版本：打包文件名 = $(TEMPLATE)_$(VERSION)_$(DATE).zip
 # （纯 ASCII 命名，避免中文文件名在控制台/zip 工具/CI 中乱码）
+# VERSION 为模板版本号（大版本 5.x 起为 2026-08 工程化重构后），发布时手动递增；
+# 对应标准的年份（2023 新标准）见 README/CHANGELOG。
 TEMPLATE = LZUThesis-PhD
-VERSION = 2023-standard
+VERSION = 5.0.0
 FILE_DATE = `date +%Y-%m-%d`
 LATEXMK = latexmk
 MAIN = template-PhD
