@@ -43,7 +43,7 @@
 
 ## 2026.8.25
 
-> 布局与文档完善
+> v5.0.0（工程化重构后的新版本体系起始；`make dist` 打包名 `LZUThesis-PhD_<版本>_<日期>.zip`）
 
 - `references.bib` 移至 `ref/refs.bib`（与 thuThesis 布局一致；改名需同步改 cls 中 `\addbibresource`）。
 - `make build` 改用 `latexmk -outdir=build`，全部产物（含 PDF）直接写入 `build/`，根目录保持纯源码。
