@@ -296,7 +296,21 @@
 }
 % 透传 AutoFakeBold 给 ctexbook：启用中文伪粗体（宋体无粗体字形，不传则 \bfseries\songti 全部失效）
 \DeclareOption{AutoFakeBold}{\PassOptionsToClass{AutoFakeBold}{ctexbook}}
+% 输出模式：
+%   electronic（默认）—— 单面排版，适合电子提交
+%   print             —— 双面排版，每章自动补空白页，适合打印装订
+\newif\iflzu@print
+\lzu@printfalse
+\DeclareOption{electronic}{\lzu@printfalse}
+\DeclareOption{print}{\lzu@printtrue}
 \ProcessOptions\relax
+
+% 应用输出模式（默认 electronic 与旧行为完全一致）
+\iflzu@print
+    \@twosidetrue
+    \@mparswitchtrue
+    \pretocmd\chapter{\cleardoublepage}{}{\PackageWarning{LZUThesis-PhD}{Cannot patch chapter for print mode}}
+\fi
 
 \fancypagestyle{mainmatterstyle}{
     \fancyhf{}
