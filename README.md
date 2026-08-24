@@ -19,6 +19,8 @@
 
 ```bash
 make build            # 一键编译，产物 build/template-PhD.pdf
+make clean            # 清理 build/
+make dist             # 编译并打包发布 zip：build/LZUThesis-PhD_<版本>_<日期>.zip
 ```
 
 写论文只改 `data/` 下的文件：`setup.tex`（封皮）→ `abstract.tex`（摘要）→ `chapNN.tex`（正文各章）→ `acknowledgements.tex`（致谢）。详见 [USAGE.md](USAGE.md)。
