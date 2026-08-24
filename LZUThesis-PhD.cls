@@ -143,8 +143,6 @@
     \hspace{-11pt}
 }
 
-\RequirePackage{textcomp}%摄氏度
-
 
 
 %======================================================%
@@ -343,9 +341,9 @@
 % 三级标题：宋体小四号，行距20磅，段前6磅，段后0磅，两端对齐，页码右对齐，左缩进3字符，序号与题名间空一个字符宽度
 
 
-\RequirePackage[font=small]{caption}
-
-\RequirePackage[titles]{tocloft}
+% 题注：小字号 + 图序与图名之间空1个汉字符（labelsep=quad，2020 新规定）
+% 注意：subfig 已加载 caption，此处选项会被静默追加生效，故合并成一次加载
+\RequirePackage[font=small,labelsep=quad]{caption}
 \renewcommand\cftchapdotsep{0.5}                %虚线间隔
 \renewcommand\cftdotsep{0.5}                    %虚线间隔
 % \renewcommand{\cftchapafterpnum}{\vspace{6pt}} %章节间隔 ，节前6磅
@@ -710,11 +708,12 @@
 \renewcommand{\thetable}{\thechapter-\@arabic  \c@table}
 \renewcommand{\thealgorithm}{\thechapter-\arabic {algorithm}}
 % 图序与图名之间空2个汉字符。2020年新规定 【2020】77号 文件
+% （labelsep=quad 选项已合并到上方唯一一次 caption 加载处）
 \DeclareCaptionLabelSeparator{qquad}{\qquad}  %两个汉字符
 \DeclareCaptionLabelSeparator{bigspace}{.\hspace*{4em}}  %三个汉字符
-\RequirePackage[labelsep=quad]{caption}
-% labelsep=quad
-% labelsep=qquad
+% 若需单独设置图/表题注分隔符，可在此处用 \captionsetup{...}：
+% \captionsetup[figure]{labelsep=qquad}
+% \captionsetup[table]{labelsep=qquad}
 % \captionsetup{labelsep=qquad}
 % 这应该图和表单独设置，但是我都设置了6，你可以自己在插入表格时单独设定图的要求
 % 参考如下： https://www.latexstudio.net/archives/8652.html
