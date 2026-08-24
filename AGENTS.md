@@ -10,8 +10,8 @@
 
 ## Build & Verify (mandatory per change)
 
-- Compile: `make build` (= latexmk -xelatex template-PhD, auto biber)
-- Regression: `pdftotext template-PhD.pdf` text diff vs baseline must be 0 lines;
+- Compile: `make build` (= latexmk -xelatex template-PhD, auto biber); PDF output at build/template-PhD.pdf
+- Regression: `pdftotext build/template-PhD.pdf` text diff vs baseline must be 0 lines;
   page count must stay 16 (default electronic mode)
 - Commit per logical module, each with its own build + diff verification
 

@@ -21,8 +21,8 @@
 推荐用 `latexmk` 一键编译（自动调度 biber，等价于 xelatex → biber → xelatex → xelatex）：
 
 ```bash
-make build            # 或 latexmk -xelatex template-PhD
-make clean            # 清理中间产物
+make build            # 或 latexmk -xelatex template-PhD；产物在 build/template-PhD.pdf
+make clean            # 清理中间产物与 build/disk
 make dist             # 编译并打包发布 zip
 ```
 

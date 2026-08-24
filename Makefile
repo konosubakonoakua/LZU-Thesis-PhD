@@ -1,8 +1,8 @@
 # Makefile for LZUThesis-PhD
 # 用法：
-#   make build    latexmk -xelatex 一键编译（自动调度 biber，等价于 xelatex->biber->xelatex->xelatex）
+#   make build    latexmk -xelatex 一键编译（自动调度 biber），产物 PDF 输出到 build/
 #   make clean    清理编译中间产物与 build/disk 目录
-#   make dist     编译并打包发布 zip（cls/tex/data/figures/bib/PDF）
+#   make dist     编译并打包发布 zip（cls/tex/data/ref/figures/PDF）
 #   make all      同 build
 
 VERSION = 2023-standard
@@ -14,8 +14,13 @@ MAIN = template-PhD
 
 all: build
 
+# 编译后在根目录生成 $(MAIN).pdf，随后移入 build/ 并清理中间产物
+# （latexmk -c 只清 aux 类文件，不动已移走的 pdf）
 build:
 	$(LATEXMK) -xelatex $(MAIN)
+	mkdir -p build
+	mv -f $(MAIN).pdf build/
+	$(LATEXMK) -c $(MAIN)
 
 clean:
 	$(LATEXMK) -c $(MAIN)
@@ -26,7 +31,7 @@ clear: clean
 dist: build
 	rm -rf build/dist disk
 	mkdir -p disk build/dist
-	cp $(MAIN).pdf build/dist/
+	cp build/$(MAIN).pdf build/dist/
 	cp LZUThesis-PhD.cls build/dist/
 	cp template-PhD.tex build/dist/
 	cp -r data build/dist/

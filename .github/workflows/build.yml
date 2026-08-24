@@ -18,9 +18,13 @@ jobs:
         with:
           root_file: template-PhD.tex
           latexmk_use_xelatex: true
+          # 与本地 make build 一致：PDF 产物移到 build/
+          post_compile: |
+            mkdir -p build
+            mv -f template-PhD.pdf build/
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
           name: LZUThesis-PhD
-          path: template-PhD.pdf
+          path: build/template-PhD.pdf

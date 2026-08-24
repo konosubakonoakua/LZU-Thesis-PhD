@@ -11,4 +11,4 @@ $xelatex = "xelatex -file-line-error -halt-on-error -interaction=nonstopmode -sy
 $bibtex_use = 1.5;
 $biber = "biber %O %S";
 
-$clean_ext = "bbl bcf run.xml synctex.gz xdv";
+$clean_ext = "bbl bcf run.xml synctex.gz xdv thm";
