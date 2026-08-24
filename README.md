@@ -36,7 +36,7 @@ make dist             # 编译并打包发布 zip
 
 本项目精简了文件，只有 `*.cls` 和 `bib`、`figure` 文件夹是必须的
 
-- [references.bib](references.bib) 是用来放你的参考文献的；（之前在 `bib` 文件夹里，`4.0.0.2025` 版本开始必须移出来）
+- [ref/refs.bib](ref/refs.bib) 是用来放你的参考文献的（与 thuThesis 布局一致；改名需同步改 `LZUThesis-PhD.cls` 里的 `\addbibresource`）
 
 - [figure](figure) 文件夹是一个图和导师签名
 

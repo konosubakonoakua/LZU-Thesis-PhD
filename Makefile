@@ -30,7 +30,7 @@ dist: build
 	cp LZUThesis-PhD.cls build/dist/
 	cp template-PhD.tex build/dist/
 	cp -r data build/dist/
-	cp references.bib build/dist/
+	cp -r ref build/dist/
 	cp -r figures build/dist/
 	rm -f build/dist/figures/*.psd
 	cd build/dist && zip -r ../../disk/研究生_$(VERSION)_$(FILE_DATE).zip . > /dev/null
