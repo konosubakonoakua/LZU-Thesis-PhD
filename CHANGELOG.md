@@ -41,6 +41,16 @@
 > 不一定是这一天更新的，只是这一天我想起来在这里补充了，更多请查看 `git history`
 
 
+## 2026.8.25
+
+> 布局与文档完善
+
+- `references.bib` 移至 `ref/refs.bib`（与 thuThesis 布局一致；改名需同步改 cls 中 `\addbibresource`）。
+- `make build` 改用 `latexmk -outdir=build`，全部产物（含 PDF）直接写入 `build/`，根目录保持纯源码。
+- 新增 [USAGE.md](USAGE.md) 使用手册（快速开始 / `\lzusetup` 键值表 / 正文结构 / 参考文献 / 编译打包）。
+- 重写 [README.md](README.md)，刷新 [QA.md](QA.md)，清理失效引用与本科生模板残留。
+
+
 ## 2026.8.24
 
 > 工程化重构（参考 thuThesis），建议连同 `*.cls`、`template-PhD.tex`、`latexmkrc`、`Makefile` 一起更新
