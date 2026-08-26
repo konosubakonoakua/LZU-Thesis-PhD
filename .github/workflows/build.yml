@@ -13,6 +13,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Linux runner 缺 Arial 字体（英文摘要 "Abstract" 用）；模板已回退到
+      # Liberation Sans，这里提前装好保证回退字体存在；zip 供 make dist 使用
+      - name: Install fonts + zip
+        run: sudo apt-get update && sudo apt-get install -y fonts-liberation zip
+
       - name: Compile thesis (latexmk -outdir=build)
         uses: xu-cheng/latex-action@v3
         with:
@@ -20,9 +25,6 @@ jobs:
           latexmk_use_xelatex: true
           # 与本地 make build 一致：所有产物直接进 build/
           args: -outdir=build
-
-      - name: Install zip (for make dist)
-        run: sudo apt-get update && sudo apt-get install -y zip
 
       - name: Package (make dist)
         run: make dist
