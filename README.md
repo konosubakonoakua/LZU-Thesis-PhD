@@ -40,7 +40,7 @@ latexmkrc + Makefile     编译与打包工具链
 
 ## 遇到问题
 
-先看 [QA.md](QA.md)，解决不了去 [github - issue](https://github.com/konosubakonoakua/LZUThesis2020/issues?q=) 提问。
+先看 [QA.md](QA.md)，解决不了去 [github - issue](https://github.com/konosubakonoakua/LZU-Thesis-PhD/issues?q=) 提问。
 
 ---
 
