@@ -43,7 +43,7 @@ make build        # 产物在 build/template-PhD.pdf
 
 ### Linux 环境字体导致的问题
 
-- linux 默认没有 Arial 字体：搜索 `LZUThesis-PhD.cls` 中的 `\fontspec{Arial}`，删除该命令（英文摘要的 "Abstract" 将使用默认字体，略不符合要求），或自行安装 Arial 字体（注意是安装后的字体名，不是文件名）。
+- linux 默认没有 Arial 字体（英文摘要的 "Abstract" 用）：模板已自动回退——无 Arial 时用 `Liberation Sans`（与 Arial 度量兼容），两者都无则用默认无衬线体，**无需手动改**。若想换字体，搜索 `LZUThesis-PhD.cls` 中 `\IfFontExistsTF{Arial}` 附近代码自行调整。
 - linux 无法显示 `玥` 等生僻字：自行安装字体后自定义中文字体族：
 
 ```tex

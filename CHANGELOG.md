@@ -41,6 +41,14 @@
 > 不一定是这一天更新的，只是这一天我想起来在这里补充了，更多请查看 `git history`
 
 
+## 2026.8.27
+
+> 修复 CI（Linux）编译失败
+
+- 英文摘要 "Abstract" 的 Arial 字体在 Linux 上不存在导致 xelatex 报错：模板改用 `\IfFontExistsTF` 自动回退（Arial → Liberation Sans → 默认无衬线体），Windows 行为不变。
+- CI workflow 在编译前安装 `fonts-liberation`，保证回退字体存在。
+
+
 ## 2026.8.25
 
 > v5.0.0（工程化重构后的新版本体系起始；`make dist` 打包名 `LZUThesis-PhD_<版本>_<日期>.zip`）

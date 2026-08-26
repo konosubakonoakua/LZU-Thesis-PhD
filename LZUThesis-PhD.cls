@@ -603,7 +603,12 @@
     \linespread{1}
     \selectfont
     \setlength{\parskip}{18pt}
-    \zihao{3}\fontspec{Arial}\bfseries Abstract %Linux没有这个字体，需要自己安装，或者自定义命令
+    % "Abstract" 字体：规范要求 Arial；Linux/mac 无 Arial 时回退到 Liberation Sans
+    % （与 Arial 度量兼容，TeX Live/Ubuntu 常见），再无则用默认无衬线体
+    \zihao{3}\bfseries
+    \IfFontExistsTF{Arial}{\fontspec{Arial}}%
+        {\IfFontExistsTF{Liberation Sans}{\fontspec{Liberation Sans}}{\sffamily}}%
+    Abstract
 \end{center}%
 \setlength{\parskip}{0pt}
 \setlength{\baselineskip}{20pt} %行距20磅
