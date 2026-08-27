@@ -13,23 +13,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # latex-action 默认在 Docker 容器内编译（installer: container），
-      # 与宿主环境隔离：宿主机 apt 装的包到不了容器里。
-      # 所以环境准备放进 action 的 pre_compile（容器内执行）：
-      #   - make          post_compile 里跑 make dist 需要
-      #   - zip           打包需要
-      #   - fonts-liberation  英文摘要 Arial 的 Linux 回退字体
-      - name: Compile and package
+      # 容器内编译（latex-action 默认 texlive-full 容器镜像）：
+      # 镜像内没有 apt/apk 等系统包管理（装不了任何东西），但 TeX Live 齐全、
+      # 编译无需额外系统包（英文摘要 Arial 缺失由模板回退链兜底）。
+      # 产物写入 build/（工作区挂载，宿主可见）
+      - name: Compile thesis
         uses: xu-cheng/latex-action@v3
         with:
           root_file: template-PhD.tex
           latexmk_use_xelatex: true
           # 与本地 make build 一致：所有产物直接进 build/
           args: -outdir=build
-          pre_compile: |
-            apt-get update && apt-get install -y make zip fonts-liberation
-          post_compile: |
-            make dist
+
+      # 打包在宿主机做（ubuntu 有 apt）：make package 只拷文件+zip，
+      # 不依赖 latexmk，规避容器缺工具的问题
+      - name: Install zip
+        run: sudo apt-get update && sudo apt-get install -y zip
+
+      - name: Package (make package)
+        run: make package
 
       - name: Upload PDF and dist zip
         uses: actions/upload-artifact@v4

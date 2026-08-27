@@ -1,10 +1,11 @@
 # Makefile for LZUThesis-PhD
 # 用法：
-#   make build    latexmk -xelatex -outdir=build 一键编译，所有产物（含 PDF）直接进 build/
-#   make clean    清理 build/ 与旧 disk/ 残留
-#   make dist     编译并打包发布 zip（输出到 build/）
-#   make all      同 build
-#   make help     显示本帮助
+#   make build     latexmk -xelatex -outdir=build 一键编译，所有产物（含 PDF）直接进 build/
+#   make clean     清理 build/ 与旧 disk/ 残留
+#   make package   只打包发布 zip（不编译；CI 容器编译后由宿主环境调用）
+#   make dist      本地一条龙：编译 + 打包（zip 输出到 build/）
+#   make all       同 build
+#   make help      显示本帮助
 
 # 模板名与版本：打包文件名 = $(TEMPLATE)_$(VERSION)_$(DATE).zip
 # （纯 ASCII 命名，避免中文文件名在控制台/zip 工具/CI 中乱码）
@@ -18,7 +19,7 @@ LATEXMK = latexmk
 MAIN = template-PhD
 DIST_ZIP = $(TEMPLATE)_$(VERSION)_$(FILE_DATE).zip
 
-.PHONY: all build clean clear dist help
+.PHONY: all build clean clear dist package help
 
 all: build
 
@@ -32,8 +33,9 @@ clean:
 
 clear: clean
 
-# 打包：PDF + 模板源 + 文档 + 数据，zip 输出到 build/$(DIST_ZIP)
-dist: build
+# 只打包、不编译：CI 在 latex-action 容器里编译完，宿主环境直接调本目标
+# （不依赖 latexmk，宿主只需 make + zip + git）
+package:
 	rm -rf build/dist
 	mkdir -p build/dist
 	cp build/$(MAIN).pdf build/dist/
@@ -47,8 +49,12 @@ dist: build
 	cd build/dist && zip -r ../$(DIST_ZIP) . > /dev/null
 	ls -l build/$(DIST_ZIP)
 
+# 本地一条龙：编译 + 打包
+dist: build package
+
 help:
-	@echo "make build  - compile into build/ (latexmk -xelatex -outdir=build)"
-	@echo "make clean  - remove build/ and stale disk/"
-	@echo "make dist   - build + package zip -> build/$(DIST_ZIP)"
-	@echo "make all    - alias for build"
+	@echo "make build    - compile into build/ (latexmk -xelatex -outdir=build)"
+	@echo "make clean    - remove build/ and stale disk/"
+	@echo "make package  - zip build/ contents only (no compile, for CI host)"
+	@echo "make dist     - build + package -> build/$(DIST_ZIP)"
+	@echo "make all      - alias for build"
