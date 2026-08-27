@@ -30,6 +30,11 @@ jobs:
       - name: Install zip
         run: sudo apt-get update && sudo apt-get install -y zip
 
+      # 容器以 root 运行，build/ 产物属主是 root，宿主 runner 用户无权写入；
+      # 打包前先把属主改回 runner 用户
+      - name: Fix build/ ownership (container ran as root)
+        run: sudo chown -R "$USER:$USER" build
+
       - name: Package (make package)
         run: make package
 
