@@ -18,16 +18,18 @@ jobs:
       - name: Install fonts + zip
         run: sudo apt-get update && sudo apt-get install -y fonts-liberation zip
 
-      - name: Compile thesis (latexmk -outdir=build)
+      # 编译 + 打包都放 latex-action 环境内执行：
+      # 它安装的 TeX Live 只在该步的 PATH 里生效，独立 run 步骤拿不到
+      # （否则 make dist 会报 latexmk: command not found）
+      - name: Compile and package (make build + make dist)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: template-PhD.tex
           latexmk_use_xelatex: true
           # 与本地 make build 一致：所有产物直接进 build/
           args: -outdir=build
-
-      - name: Package (make dist)
-        run: make dist
+          post_compile: |
+            make dist
 
       - name: Upload PDF and dist zip
         uses: actions/upload-artifact@v4
